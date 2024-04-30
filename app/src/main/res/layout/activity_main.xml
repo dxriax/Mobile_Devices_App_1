@@ -5,15 +5,150 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop = "27dp"
+    android:layout_margin="20dp"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tvBordasMethod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/bordas_method"
+        android:textColor="@color/orange"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNumOptions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/numOptions"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/etNumOptions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBordasMethod" />
+
+    <EditText
+        android:id="@+id/etNumOptions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:gravity="center"
+        android:inputType="number"
+        android:hint="3"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvNumOptions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tvBordasMethod" />
+
+    <TextView
+        android:id="@+id/tvVotingOptions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/numOptions"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNumOptions" />
+
+    <EditText
+        android:id="@+id/etVotingOptions"
+        android:layout_width="0dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/light_yellow"
+        android:inputType="textMultiLine"
+        android:hint="@string/entering"
+        android:textSize="19sp"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvVotingOptions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvVotingOptions" />
+
+    <TextView
+        android:id="@+id/tvNumVotes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/numVotes"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etVotingOptions" />
+
+    <TextView
+        android:id="@+id/tvNumVotings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@color/yellow"
+        android:ems="2"
+        android:gravity="center"
+        android:text="3"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvNumVotes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tvNumVotes" />
+
+    <Button
+        android:id="@+id/btnStartOver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnStartOver"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNumVotes" />
+
+    <Button
+        android:id="@+id/btnAddVote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/btnAdd"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNumVotings" />
+
+    <View
+        android:id="@+id/vDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartOver"
+         />
+
+    <Switch
+        android:id="@+id/swResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/switchResults"
+        android:textSize="20sp"
+        android:textColor="@color/light_grey"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vDivider"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:background="@color/light_grey"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swResults"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

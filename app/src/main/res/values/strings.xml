@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="bordas_method">Borda\'s Method</string>
+    <string name="numOptions">Number of Options:</string>
+    <string name="options">Voting Options:</string>
+    <string name="entering">Enter all Options seperated by Comma!</string>
+    <string name="switchResults">Show Voting Results</string>
+    <string name="numVotes">Number of Votes So Far:</string>
+    <string name="btnStartOver">Start Over</string>
+    <string name="btnAdd">Add a Vote</string>
 </resources>
