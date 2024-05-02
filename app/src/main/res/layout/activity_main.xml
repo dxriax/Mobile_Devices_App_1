@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop = "27dp"
-    android:layout_margin="20dp"
+    android:paddingTop = "10dp"
+    android:layout_margin="10dp"
     tools:context=".MainActivity">
 
     <TextView
@@ -116,6 +116,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNumVotings" />
+
 
     <View
         android:id="@+id/vDivider"

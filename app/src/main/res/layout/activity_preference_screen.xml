@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop = "10dp"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    tools:context=".PreferenceScreen">
+
+    <TextView
+        android:id="@+id/tvYourPrefernces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/your_preferences"
+        android:textColor="@color/dark_green"
+        android:textSize="30sp"
+        android:textStyle="normal" />
+
+
+    <LinearLayout
+        android:id="@+id/vColoredView"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/mint"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvOption1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 1" />
+
+        <SeekBar
+            android:id="@+id/sbOption1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvOption2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Option 2" />
+
+        <SeekBar
+            android:id="@+id/sbOption2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvOption3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Option 3" />
+
+        <SeekBar
+            android:id="@+id/sbOption3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+        <View
+            android:id="@+id/vDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/tvYourVote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Your Borda Vote"
+        android:textColor="@color/orange"
+        android:textSize="30sp"
+        android:textStyle="normal"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="158dp"
+        android:text="TextView" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            colo
+            android:text="Button 1" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 2" />
+
+
+    </LinearLayout>/

@@ -2,10 +2,20 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="orange">#FFFF9A07</color>
-    <color name="light_yellow">#FFFFF5BC</color>
-    <color name="yellow">#FFFFEB3B</color>
     <color name="light_grey">#FFC3C3C3</color>
+
+    <color name="yellow">#FFFFEB3B</color>
+
+    <color name="orange">#FFFF9A07</color>
+    <color name="light_orange">#FFFEC87F</color>
+    <color name="light_yellow">#FFFFF5BC</color>
+
+    <color name="mint">#FFDBECEE</color>
+
+    <color name="dark_green">#FF2D6A45</color>
+    <color name="green">#FF4CAE4F</color>
+
+    <color name="red">#FFFE0400</color>
 
 
 </resources>
