@@ -27,9 +27,9 @@
         android:id="@+id/vColoredView"
         android:layout_width="match_parent"
         android:layout_height="350dp"
+        android:layout_margin="10dp"
         android:background="@color/mint"
         android:orientation="vertical"
-        android:layout_margin = "10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvYourPrefernces">
@@ -75,46 +75,49 @@
         android:id="@+id/tvYourVote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="Your Borda Vote"
         android:textColor="@color/orange"
         android:textSize="30sp"
         android:textStyle="normal"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="415dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toStartOf="@+id/tvPoints"
+        app:layout_constraintStart_toEndOf="@+id/vDivider"
+        app:layout_constraintTop_toBottomOf="@+id/vColoredView" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/red"
         android:text="CANCEL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPoints" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/green"
         android:text="CONFIRM YOUR VOTE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPoints"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnCancel"
+      />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvPoints"
         android:layout_width="match_parent"
         android:layout_height="190dp"
         android:layout_margin="10dp"
+        android:background="@color/light_orange"
         android:text="Option 1 -> 3 points"
         android:textAlignment="center"
-        android:background="@color/light_orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvYourVote" />
