@@ -120,7 +120,8 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvYourVote" />
+        app:layout_constraintTop_toBottomOf="@+id/tvYourVote"
+        app:layout_constraintBottom_toTopOf="@+id/btnConfirm"/>
 
     <View
         android:id="@+id/vDivider"
