@@ -39,7 +39,7 @@
         android:ems="2"
         android:gravity="center"
         android:inputType="number"
-        android:hint="3"
+        android:hint="@string/defaultNumOpt"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvNumOptions"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/numOptions"
+        android:text="@string/options"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNumOptions" />
