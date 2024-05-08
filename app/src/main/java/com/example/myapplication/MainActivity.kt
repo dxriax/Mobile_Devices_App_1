@@ -2,7 +2,8 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.view.View
+
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,11 +20,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        //Switch Screens by pressing "Add a Vote - Button"
-        val button = findViewById<Button>(R.id.btnAddVote)
-        button.setOnClickListener {
-            val intent = Intent(this, PreferenceScreen::class.java)
-            startActivity(intent)
-        }
+    }
+    //Switch Screens by pressing "Add a Vote - Button"
+    fun onAddVoteButtonClick (view: View){
+        val intent = Intent(this, PreferenceScreen::class.java)
+        startActivity(intent)
     }
 }
