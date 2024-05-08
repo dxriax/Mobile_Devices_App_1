@@ -3,10 +3,17 @@
     <string name="bordas_method">Borda\'s Method</string>
     <string name="numOptions">Number of Options:</string>
     <string name="options">Voting Options:</string>
-    <string name="entering">Enter all Options seperated by Comma!</string>
+    <string name="entering">Enter all Options separated by Comma!</string>
     <string name="switchResults">Show Voting Results</string>
     <string name="numVotes">Number of Votes So Far:</string>
     <string name="btnStartOver">Start Over</string>
     <string name="btnAdd">Add a Vote</string>
     <string name="your_preferences">Your Preferences</string>
+    <string name="your_borda_vote">Your Borda Vote</string>
+    <string name="cancel">CANCEL</string>
+    <string name="confirm_your_vote">CONFIRM YOUR VOTE</string>
+    <string name="option_1_3_points"><![CDATA[Option 1 -> 3 points]]></string>
+    <string name="option_1">Option 1</string>
+    <string name="option_2">Option 2</string>
+    <string name="option_3">Option 3</string>
 </resources>
