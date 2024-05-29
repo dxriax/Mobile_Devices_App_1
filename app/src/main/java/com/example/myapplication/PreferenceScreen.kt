@@ -93,12 +93,13 @@ class PreferenceScreen : AppCompatActivity() {
     fun updateValues(linearLayout: LinearLayout) {
         val nonUniqueValues = voteMap.entries.groupBy { it.value }.filterValues { it.size > 1 }.keys
         hasNonUniqueValues = nonUniqueValues.isNotEmpty()
+
         for ((index, option) in options.withIndex()) {
             val valueTextView = linearLayout.getChildAt(index) as TextView
             val value = voteMap[option] ?: 0
             valueTextView.text = when {
                 hasNonUniqueValues && value in nonUniqueValues -> "$option -> <not unique>"
-                else -> "$option -> $value"
+                else -> "$option -> ${options.size - getPositionInOrderedMap(option)!! - 1} points"
             }
         }
     }
@@ -117,4 +118,18 @@ class PreferenceScreen : AppCompatActivity() {
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
     }
+
+    private fun getPositionInOrderedMap(key: String): Int? {
+        // Sort the map entries by value in descending order
+        val sortedEntries = voteMap.entries.sortedByDescending { it.value }
+
+        // Find the position of the key in the sorted list
+        for ((index, entry) in sortedEntries.withIndex()) {
+            if (entry.key == key) {
+                return index
+            }
+        }
+        return null // Key not found in the sorted map
+    }
+
 }
