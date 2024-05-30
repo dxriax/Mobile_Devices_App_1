@@ -11,6 +11,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.io.Serializable
 
 class PreferenceScreen : AppCompatActivity() {
 
@@ -56,7 +57,7 @@ class PreferenceScreen : AppCompatActivity() {
             // Create SeekBar for selecting option value
             val seekBar = SeekBar(this).apply {
                 progress = 0
-                max = 10
+                max = 50
             }
             llColoredView.addView(seekBar)
 
@@ -111,13 +112,25 @@ class PreferenceScreen : AppCompatActivity() {
             Toast.makeText(this, "Votes are not unique!", Toast.LENGTH_SHORT).show()
             return
         }
-        // Return the vote result to the calling activity
+
         val resultIntent = Intent().apply {
             putExtra("result_vote", voteAdded)
         }
+
+        if (voteAdded == 1) {
+
+            /////////////////////////////////////////////////// TO DO
+
+          //  val bordaValue = options.size - getPositionInOrderedMap(option)?.minus(1)!!
+
+            // Ensure voteMap is sent only when the confirm button is clicked
+            resultIntent.putExtra("vote_Map", voteMap as Serializable)
+        }
+        // Return the vote result to the calling activity
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
     }
+
 
     private fun getPositionInOrderedMap(key: String): Int? {
         // Sort the map entries by value in descending order

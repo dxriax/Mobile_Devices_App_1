@@ -16,6 +16,10 @@ class MainActivity : AppCompatActivity() {
     private var etVotingOptions: EditText? = null
     private var tvNumVotings: TextView? = null
     private var btnAddVote: Button? = null
+    private var btnStartOver: Button? = null
+    private var switchResult: Switch? = null
+    private var llResults: LinearLayout? = null
+
 
     private var votesAmount = 0
     private var checkChangeINT: Int? = 0
@@ -64,9 +68,17 @@ class MainActivity : AppCompatActivity() {
         etVotingOptions = findViewById(R.id.etVotingOptions)
         tvNumVotings = findViewById(R.id.tvNumVotings)
         btnAddVote = findViewById(R.id.btnAddVote)
+        btnStartOver = findViewById(R.id.btnStartOver)
+        switchResult = findViewById(R.id.swResults)
+        llResults = findViewById(R.id.llResults)
 
         // Set OnClickListener for the Add Vote button
         btnAddVote?.setOnClickListener {
+            onClick(it)
+        }
+
+        // Set OnClickListener for the Start Over button
+        btnStartOver?.setOnClickListener {
             onClick(it)
         }
 
@@ -80,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
         etVotingOptions?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -92,7 +105,29 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        switchResult?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+
+                // FOR SCHLEIFE UM TEXT VIEWS MIT RICHTIGEN ERGEBNISSEN ANZEIGEN
+                val maxEntry = resultMap.maxByOrNull { it.value }
+                for ((option, value) in resultMap) {
+                    // Create TextView to display option name
+                    val nameOption = TextView(this).apply {
+                        // Check if the current entry is the maximum entry
+                        if (maxEntry != null && value == maxEntry.value) {
+                            text = "*** $option -> $value points ***"
+                        } else {
+                            text = "$option -> $value points"
+                        }
+                    }
+                    llResults!!.addView(nameOption)
+                }
+            } else {
+                llResults?.removeAllViews()
+            }
+        }
     }
+
 
     // Handle button click events
     private fun onClick(v: View) {
@@ -100,6 +135,8 @@ class MainActivity : AppCompatActivity() {
             checkInput(etVotingOptions!!)
             // Start the second activity with the options list
             startPreferenceScreenActivity(trimmedStringsOption)
+        } else if (v == btnStartOver) {
+            resetVotes()
         }
     }
 
@@ -135,11 +172,17 @@ class MainActivity : AppCompatActivity() {
             // Handle empty or invalid input
             var options: MutableList<String> = mutableListOf()
             if (etVotingOptions?.text?.isNotEmpty() == true) {
-                options = etVotingOptions?.text.toString().split(",").map { it.trim() }.toMutableList()
+                options = etVotingOptions?.text
+                    .toString()
+                    .split(",")
+                    .map { it.trim() } // Entfernen von Leerzeichen um jedes Element herum
+                    .filter { it.isNotEmpty() } // Entfernen leerer Strings
+                    .toMutableList()
             } else {
-                // Create default options based on numOptions
+                // Erstellen Sie Standardoptionen basierend auf numOptions
                 options = (1..numOptions).map { "Option $it" }.toMutableList()
             }
+
 
             trimmedStringsOption = adjustOptions(options, numOptions)
 
@@ -179,8 +222,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resetVotes () {
+        resultMap.clear()
         votesAmount = 0
         tvNumVotings?.text = "0"
 
     }
+
+
 }
