@@ -120,8 +120,10 @@ class PreferenceScreen : AppCompatActivity() {
         if (voteAdded == 1) {
 
             /////////////////////////////////////////////////// TO DO
+            for ((option, points) in voteMap) {
+                voteMap[option] = voteMap.size - getPositionInOrderedMap(option)!! - 1
+            }
 
-          //  val bordaValue = options.size - getPositionInOrderedMap(option)?.minus(1)!!
 
             // Ensure voteMap is sent only when the confirm button is clicked
             resultIntent.putExtra("vote_Map", voteMap as Serializable)

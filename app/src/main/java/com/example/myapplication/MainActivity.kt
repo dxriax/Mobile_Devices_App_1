@@ -1,10 +1,12 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private var tvNumVotings: TextView? = null
     private var btnAddVote: Button? = null
     private var btnStartOver: Button? = null
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private var switchResult: Switch? = null
     private var llResults: LinearLayout? = null
 
@@ -59,6 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -97,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (votesAmount != 0 && !checkChangeLIST!!.equals(trimmedStringsOption)) {
+                if (votesAmount != 0 ) { // && !checkChangeLIST!!.equals(trimmedStringsOption
                     resetVotes()
                 }
             }
@@ -110,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
                 // FOR SCHLEIFE UM TEXT VIEWS MIT RICHTIGEN ERGEBNISSEN ANZEIGEN
                 val maxEntry = resultMap.maxByOrNull { it.value }
-                for ((option, value) in resultMap) {
+                for ((option, value: Int) in resultMap) {
                     // Create TextView to display option name
                     val nameOption = TextView(this).apply {
                         // Check if the current entry is the maximum entry
@@ -119,6 +123,7 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             text = "$option -> $value points"
                         }
+                        gravity = Gravity.CENTER
                     }
                     llResults!!.addView(nameOption)
                 }
@@ -141,6 +146,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Validate and process input from EditTexts
+    @SuppressLint("SetTextI18n")
     private fun checkInput(v: View) {
         if (v == etNumOptions) {
             val numOptionsInput = etNumOptions?.text.toString()
@@ -170,7 +176,7 @@ class MainActivity : AppCompatActivity() {
             numOptions = etNumOptions?.text.toString().toIntOrNull() ?: 3
 
             // Handle empty or invalid input
-            var options: MutableList<String> = mutableListOf()
+            val options: MutableList<String>
             if (etVotingOptions?.text?.isNotEmpty() == true) {
                 options = etVotingOptions?.text
                     .toString()
@@ -186,10 +192,6 @@ class MainActivity : AppCompatActivity() {
 
             trimmedStringsOption = adjustOptions(options, numOptions)
 
-          if (checkChangeLIST.isEmpty()) {
-                checkChangeLIST = trimmedStringsOption
-              Toast.makeText(this, "CheckChangeLIST assigned!", Toast.LENGTH_SHORT).show()  // DELETE LATER
-            }
         }
     }
 
