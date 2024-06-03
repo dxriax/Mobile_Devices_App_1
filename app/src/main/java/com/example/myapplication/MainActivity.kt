@@ -225,6 +225,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetVotes () {
         resultMap.clear()
+        llResults?.removeAllViews()
         votesAmount = 0
         tvNumVotings?.text = "0"
 
