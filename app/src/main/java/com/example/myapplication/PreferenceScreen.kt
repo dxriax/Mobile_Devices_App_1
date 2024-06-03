@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -119,11 +120,7 @@ class PreferenceScreen : AppCompatActivity() {
 
         if (voteAdded == 1) {
 
-            /////////////////////////////////////////////////// TO DO
-            for ((option, points) in voteMap) {
-                voteMap[option] = voteMap.size - getPositionInOrderedMap(option)!! - 1
-            }
-
+            setBordaValues()
 
             // Ensure voteMap is sent only when the confirm button is clicked
             resultIntent.putExtra("vote_Map", voteMap as Serializable)
@@ -145,6 +142,14 @@ class PreferenceScreen : AppCompatActivity() {
             }
         }
         return null // Key not found in the sorted map
+    }
+
+    private fun setBordaValues () {
+        val sortedEntries = voteMap.entries.sortedByDescending { it.value }
+        sortedEntries.forEachIndexed { index, entry ->
+            val bordaValue = voteMap.size - index - 1
+            voteMap[entry.key] = bordaValue
+        }
     }
 
 }

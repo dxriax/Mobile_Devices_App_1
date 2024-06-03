@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     private var votesAmount = 0
     private var checkChangeINT: Int? = 0
-    private var checkChangeLIST: MutableList<String> = mutableListOf()
     private var numOptions: Int = 3
     private var trimmedStringsOption: MutableList<String> = mutableListOf()
     private var resultMap: MutableMap<String, Int> = mutableMapOf()
