@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     // Declare variables for managing votes and options
     private var votesAmount = 0
-    private var checkChangeINT: Int? = 0
+    private var checkChangeNumOptions: Int? = 0
     private var numOptions: Int = 3
     private var trimmedStringsOption: MutableList<String> = mutableListOf()
     private var resultMap: MutableMap<String, Int> = mutableMapOf()
@@ -87,15 +86,15 @@ class MainActivity : AppCompatActivity() {
             onClick(it)
         }
 
+
+
         // Set onFocusChangeListener for etNumOptions to validate input when focus is lost
         etNumOptions?.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
-                if (votesAmount != 0) {
-                    resetVotes()
-                }
                 checkInput(etNumOptions!!)
             }
         }
+
 
         // Add a TextWatcher to etVotingOptions to reset votes when text changes
         etVotingOptions?.addTextChangedListener(object : TextWatcher {
@@ -103,11 +102,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (votesAmount != 0) {
-                    resetVotes()
+                    resetVotes("All votes resetted!")
+
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+            }
         })
 
         // Set OnCheckedChangeListener for switchResult to display results
@@ -135,11 +136,18 @@ class MainActivity : AppCompatActivity() {
     // Handle button click events
     private fun onClick(v: View) {
         if (v == btnAddVote) {
+            if (etNumOptions!!.text.isEmpty()) {
+                etNumOptions!!.setText("3")
+            }
+            checkInput(etNumOptions!!)
+            // must be in this order because the filtered num of options need to be set, before creating the list1
             checkInput(etVotingOptions!!)
+
             // Start the second activity with the options list
             startPreferenceScreenActivity(trimmedStringsOption)
         } else if (v == btnStartOver) {
-            resetVotes()
+            resetVotes("Starting anew!")
+
         }
     }
 
@@ -151,25 +159,28 @@ class MainActivity : AppCompatActivity() {
 
             // Validate number of options
             if (numOptionsInput.isNotEmpty()) {
-                val numOptions = numOptionsInput.toIntOrNull()
-                if (numOptions != null) {
-                    if (numOptions < 2) {
-                        etNumOptions!!.setText("2")
-                    } else if (numOptions > 10) {
-                        etNumOptions!!.setText("10")
-                    }
+                val numOptions = numOptionsInput.toInt()
+                if (numOptions < 2) {
+                    etNumOptions!!.setText("2")
+                } else if (numOptions > 10) {
+                    etNumOptions!!.setText("10")
                 }
             }
 
             // Check if the input has changed and reset votes if necessary
             if (votesAmount == 0) {
-                checkChangeINT = numOptionsInput.toIntOrNull()
+                checkChangeNumOptions = etNumOptions?.text.toString().toIntOrNull() ?: 3
             } else {
-                if (checkChangeINT != numOptionsInput.toIntOrNull()) {
-                    resetVotes()
+                // Special Case: if focus isnt lost (etNumOptions) focus and there for the changes cannot be detected, this handles it
+                if(numOptionsInput != checkChangeNumOptions.toString() && etNumOptions!!.text.isNotEmpty()) {
+                    resetVotes("All votes resetted!")
+
                 }
             }
+
+
         } else if (v == etVotingOptions) {
+
             // Get number of options or default to 3
             numOptions = etNumOptions?.text.toString().toIntOrNull() ?: 3
 
@@ -221,10 +232,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Reset the votes and results
-    private fun resetVotes() {
+    private fun resetVotes(message: String) {
         resultMap.clear()
         llResults?.removeAllViews()
         votesAmount = 0
         tvNumVotings?.text = "0"
+
+        Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+        switchResult!!.isChecked = false
     }
+
 }
