@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Borda\'s Voting</string>
     <string name="bordas_method">Borda\'s Method</string>
     <string name="numOptions">Number of Options:</string>
     <string name="options">Voting Options:</string>

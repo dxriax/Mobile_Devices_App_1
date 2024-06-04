@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    // Declare UI elements
     private var etNumOptions: EditText? = null
     private var etVotingOptions: EditText? = null
     private var tvNumVotings: TextView? = null
@@ -24,14 +25,14 @@ class MainActivity : AppCompatActivity() {
     private var switchResult: Switch? = null
     private var llResults: LinearLayout? = null
 
-
+    // Declare variables for managing votes and options
     private var votesAmount = 0
     private var checkChangeINT: Int? = 0
     private var numOptions: Int = 3
     private var trimmedStringsOption: MutableList<String> = mutableListOf()
     private var resultMap: MutableMap<String, Int> = mutableMapOf()
 
-    // This handles the result from the second activity
+    // Handle the result from the second activity
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -96,12 +97,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
+        // Add a TextWatcher to etVotingOptions to reset votes when text changes
         etVotingOptions?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (votesAmount != 0 ) { // && !checkChangeLIST!!.equals(trimmedStringsOption
+                if (votesAmount != 0) {
                     resetVotes()
                 }
             }
@@ -109,15 +110,13 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        // Set OnCheckedChangeListener for switchResult to display results
         switchResult?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-
-                // FOR SCHLEIFE UM TEXT VIEWS MIT RICHTIGEN ERGEBNISSEN ANZEIGEN
                 val maxEntry = resultMap.maxByOrNull { it.value }
                 for ((option, value: Int) in resultMap) {
                     // Create TextView to display option name
                     val nameOption = TextView(this).apply {
-                        // Check if the current entry is the maximum entry
                         if (maxEntry != null && value == maxEntry.value) {
                             text = "*** $option -> $value points ***"
                         } else {
@@ -132,7 +131,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     // Handle button click events
     private fun onClick(v: View) {
@@ -181,17 +179,15 @@ class MainActivity : AppCompatActivity() {
                 options = etVotingOptions?.text
                     .toString()
                     .split(",")
-                    .map { it.trim() } // Entfernen von Leerzeichen um jedes Element herum
-                    .filter { it.isNotEmpty() } // Entfernen leerer Strings
+                    .map { it.trim() } // Remove spaces around each element
+                    .filter { it.isNotEmpty() } // Remove empty strings
                     .toMutableList()
             } else {
-                // Erstellen Sie Standardoptionen basierend auf numOptions
+                // Create default options based on numOptions
                 options = (1..numOptions).map { "Option $it" }.toMutableList()
             }
 
-
             trimmedStringsOption = adjustOptions(options, numOptions)
-
         }
     }
 
@@ -217,19 +213,18 @@ class MainActivity : AppCompatActivity() {
         startForResult.launch(intent)
     }
 
+    // Update the resultMap with new voteMap
     private fun updateResultMap(resultsMap: MutableMap<String, Int>, voteMap: MutableMap<String, Int>) {
         for ((key, value) in voteMap) {
             resultsMap[key] = resultsMap.getOrDefault(key, 0) + value
         }
     }
 
-    private fun resetVotes () {
+    // Reset the votes and results
+    private fun resetVotes() {
         resultMap.clear()
         llResults?.removeAllViews()
         votesAmount = 0
         tvNumVotings?.text = "0"
-
     }
-
-
 }

@@ -16,6 +16,7 @@ import java.io.Serializable
 
 class PreferenceScreen : AppCompatActivity() {
 
+    // Declare UI elements and variables
     private var btnConfirm: Button? = null
     private var btnCancel: Button? = null
     private var voteMap: MutableMap<String, Int> = mutableMapOf()
@@ -33,12 +34,6 @@ class PreferenceScreen : AppCompatActivity() {
         // Retrieve options from the intent
         options = intent.getStringArrayListExtra("trimmedStringsOption") ?: arrayListOf()
 
-        // Finish the activity if no options are provided
-        if (options.isEmpty()) {
-            Toast.makeText(this, "No options provided", Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
 
         // Initialize the vote map with options and default values
         voteMap = options.associateWith { 0 }.toMutableMap()
@@ -119,18 +114,17 @@ class PreferenceScreen : AppCompatActivity() {
         }
 
         if (voteAdded == 1) {
-
             setBordaValues()
-
             // Ensure voteMap is sent only when the confirm button is clicked
             resultIntent.putExtra("vote_Map", voteMap as Serializable)
         }
+
         // Return the vote result to the calling activity
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
     }
 
-
+    // Get the position of the key in the sorted map
     private fun getPositionInOrderedMap(key: String): Int? {
         // Sort the map entries by value in descending order
         val sortedEntries = voteMap.entries.sortedByDescending { it.value }
@@ -144,7 +138,8 @@ class PreferenceScreen : AppCompatActivity() {
         return null // Key not found in the sorted map
     }
 
-    private fun setBordaValues () {
+    // Set Borda values for the vote map
+    private fun setBordaValues() {
         val sortedEntries = voteMap.entries.sortedByDescending { it.value }
         sortedEntries.forEachIndexed { index, entry ->
             val bordaValue = voteMap.size - index - 1
