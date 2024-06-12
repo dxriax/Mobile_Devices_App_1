@@ -52,6 +52,10 @@ class MainActivity : AppCompatActivity() {
 
                     votesAmount++
                     tvNumVotings?.text = votesAmount.toString()
+                    if (switchResult!!.isChecked) { // special case: if switch is checked, make sure to update values
+                        displayResults()
+                    }
+
                 } else {
                     Toast.makeText(
                         applicationContext,
@@ -114,24 +118,13 @@ class MainActivity : AppCompatActivity() {
         // Set OnCheckedChangeListener for switchResult to display results
         switchResult?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                val maxEntry = resultMap.maxByOrNull { it.value }
-                for ((option, value: Int) in resultMap) {
-                    // Create TextView to display option name
-                    val nameOption = TextView(this).apply {
-                        if (maxEntry != null && value == maxEntry.value) {
-                            text = "*** $option -> $value points ***"
-                        } else {
-                            text = "$option -> $value points"
-                        }
-                        gravity = Gravity.CENTER
-                    }
-                    llResults!!.addView(nameOption)
-                }
+                displayResults()
             } else {
                 llResults?.removeAllViews()
             }
         }
     }
+
 
     // Handle button click events
     private fun onClick(v: View) {
@@ -140,7 +133,7 @@ class MainActivity : AppCompatActivity() {
                 etNumOptions!!.setText("3")
             }
             checkInput(etNumOptions!!)
-            // must be in this order because the filtered num of options need to be set, before creating the list1
+            // must be in this order because the filtered num of options need to be set, before creating the optionlist
             checkInput(etVotingOptions!!)
 
             // Start the second activity with the options list
@@ -202,6 +195,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     // Ensure the options list has the correct number of entries
     private fun adjustOptions(options: MutableList<String>?, numOptions: Int): MutableList<String> {
         var length = options?.size ?: 0
@@ -240,6 +235,25 @@ class MainActivity : AppCompatActivity() {
 
         Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
         switchResult!!.isChecked = false
+    }
+
+    private fun displayResults() {
+        if (resultMap.isNotEmpty()) {
+            llResults?.removeAllViews()
+            val maxEntry = resultMap.maxByOrNull { it.value }
+            for ((option, value: Int) in resultMap) {
+                // Create TextView to display option name
+                val nameOption = TextView(this).apply {
+                    if (maxEntry != null && value == maxEntry.value) {
+                        text = "*** $option -> $value points ***"
+                    } else {
+                        text = "$option -> $value points"
+                    }
+                    gravity = Gravity.CENTER
+                }
+                llResults!!.addView(nameOption)
+            }
+        }
     }
 
 }

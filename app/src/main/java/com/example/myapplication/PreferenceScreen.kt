@@ -91,15 +91,21 @@ class PreferenceScreen : AppCompatActivity() {
         val nonUniqueValues = voteMap.entries.groupBy { it.value }.filterValues { it.size > 1 }.keys
         hasNonUniqueValues = nonUniqueValues.isNotEmpty()
 
-        for ((index, option) in options.withIndex()) {
-            val valueTextView = linearLayout.getChildAt(index) as TextView
-            val value = voteMap[option] ?: 0
-            valueTextView.text = when {
+        // Get sorted voteMap entries by value in descending order
+        val sortedEntries = voteMap.entries.sortedByDescending { it.value }
+
+        // Update the TextViews in sorted order
+        sortedEntries.forEachIndexed { index, entry ->
+            val option = entry.key
+            val value = entry.value
+            val valueTextView = linearLayout.getChildAt(index) as? TextView
+            valueTextView?.text = when {
                 hasNonUniqueValues && value in nonUniqueValues -> "$option -> <not unique>"
-                else -> "$option -> ${options.size - getPositionInOrderedMap(option)!! - 1} points"
+                else -> "$option -> ${options.size - index - 1} points"
             }
         }
     }
+
 
     // Function to handle button clicks
     private fun onClick(v: View) {
